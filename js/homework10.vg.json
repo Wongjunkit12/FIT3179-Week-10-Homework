@@ -1,0 +1,79 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Global Capital Flow: Imports Over Time",
+  "width": 1200,
+  "height": 720,
+  "data": {
+    "url": "data/Homework10_edited.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "params": [
+    {
+      "name": "Current_Year",
+      "value": 2000,
+      "bind": {
+        "input": "range",
+        "min": 2000,
+        "max": 2020,
+        "step": 1,
+        "name": "Year: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "mark": "bar",
+      "transform": [
+        {
+          "filter":"datum.Year == Current_Year"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "Continent",
+          "type": "nominal",
+          "title": "Continent"
+        },
+        "y": {
+          "field": "Import (US$ Billion)",
+          "type": "quantitative",
+          "title": "Capital Outflow in Imports (US$ Billion)"
+        },
+        "color": {
+          "field": "Continent",
+          "type": "nominal",
+          "title": "Continent",
+          "scale": {
+            "domain": [
+              "North America",
+              "South America",
+              "Europe",
+              "Africa",
+              "Asia",
+              "Oceania"
+            ],
+            "range": [
+              "#e41a1c",
+              "#984ea3",
+              "#ff7f00",
+              "#a6cee3",
+              "#377eb8",
+              "#a65628"
+            ]
+          }
+        },
+        "opacity": {
+          "value": 0.6
+        },
+        "tooltip": [
+          {"field": "Continent", "type": "nominal", "title": "Continent"},
+          {"field": "Year", "type": "quantitative", "title": "Year"},
+          {"field": "Import (US$ Billion)", "type": "quantitative", "title": "Capital Outflow in Imports (US$ Billion)"}
+        ]
+      }
+    }
+  ],
+  "config": {}
+}
