@@ -13,6 +13,12 @@
         }
       }
     ],
+    "data": {
+      "url": "data/Homework10_edited.csv",
+      "format": {
+        "type": "csv"
+      }
+    },
     "vconcat": [
       {
         "title": "Value of Exported Goods in Billions of US Dollars in 2020",
@@ -30,17 +36,18 @@
         },
         "transform": [
           {
-            "lookup": "properties.NAME",
+            "lookup": "Country",
             "from": {
               "data": {
-                "url": "data/Homework10_edited.csv",
+                "url": "js/countries.topojson",
                 "format": {
-                  "type": "csv"
+                  "type": "topojson",
+                  "feature": "countries"
                 }
               },
-              "key": "Country",
-              "fields": ["Export (US$ Billion)", "Continent", "Year"]
-            }
+              "key": "properties.NAME"
+            },
+            "as": "geo"
           }
         ],
         "layer": [
@@ -63,6 +70,10 @@
               "type": "geoshape", "stroke": "gray"
             },
             "encoding": {
+              "shape": {
+                "field": "geo", 
+                "type": "geojson"
+              },
               "color": {
                 "field": "Export (US$ Billion)",
                 "type": "quantitative",
